@@ -12,9 +12,11 @@ Servo servoNumber1;
 const int TRIG_PIN = 3;  
 const int ECHO_PIN = 2; 
 const int DISTANCE_THRESHOLD = 50;
+const float SPEED = 0.017
 
 //variables
-float duration, distance_cm;
+float duration;
+float distance_cm;
 
 //setup
 void setup() {  
@@ -34,7 +36,7 @@ void loop() {
   digitalWrite(TRIG_PIN, LOW);  
   delayMicroseconds(2);  
 
-  //sets trig pin on high fpr 10 micro seconds
+  //sets trig pin on high for 10 microseconds
   digitalWrite(TRIG_PIN, HIGH);  
   delayMicroseconds(10);  
   digitalWrite(TRIG_PIN, LOW);  
@@ -42,7 +44,7 @@ void loop() {
   //reads the echo pin, returns the sound wave travel time in microseconds
   duration = pulseIn(ECHO_PIN, HIGH);  
 
-  distance_cm = 0.017 * duration;
+  distance_cm = SPEED * duration;
   
   if (distance_cm < DISTANCE_THRESHOLD){
   	servoNumber1.write(90);
